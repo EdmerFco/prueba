@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        var cronometro;
+        function detenerse(){
+            clearInterval(cronometro)
+        }
+        function seguir(){
+            carga();
+        }
+        function carga() {
+            contador_S= 0;
+            contador_M = 0;
+            contador_H = 0;
+            S = document.getElementById("segundos");
+            M = document.getElementById("minutos");
+            H = document.getElementById("horas")
+            /*window.setInterval(); nos permite ejecuatar ua piesa de codigo cada deteminado tiempo*/
+            cronometro = setInterval(
+                function(){
+                    if(contador_S == 60){
+                        contador_S=0;
+                        contador_M++;
+                        M.innerHTML = contador_M;
+                        if(contador_M==60){
+                            contador_M=0;
+                            contador_H++;
+                            H.innerHTML = contador_H;
+                        }
+                    }
+                    S.innerHTML = contador_S;
+                    contador_S ++;
+                },1000
+            );
+        }        
+    </script>
+    <title>Cronometro</title>
+</head> 
+
+<body onload="carga()">
+    <p>
+        <span id="horas">0</span>:<span id="minutos">0</span>.<span id="segundos">0</span>
+
+    </p>
+    <input type="button" onclick="detenerse()" value="detenerse"/>
+    <input type="button" onclick="seguir()" value="seguir">
+
+</body>
+
+</html>
